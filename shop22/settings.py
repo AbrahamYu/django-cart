@@ -155,3 +155,9 @@ EMAIL_HOST_USER = 'gxganz@naver.com'
 EMAIL_HOST_PASSWORD = 'xxxxxxxx'
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# paypal popup setting
+# There's a new feature in django 4.0 that follows the addition of the COOP header in newer browsers which, as I understand it, stops remote sites from opening a window in the same browsing context.
+# The default setting of SECURE_CROSS_ORIGIN_OPENER_POLICY in django isolates the browsing context to just the current document origin. Setting it to same-origin-allow-popups allows the paypal popup to open in the current context.
+# See https://docs.djangoproject.com/en/4.0/ref/middleware/#cross-origin-opener-policy
+SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'
