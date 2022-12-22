@@ -108,8 +108,7 @@ def login(request):
                             cart_item = Cartitem.objects.filter(cart=cart)
                             for item in cart_item:
                                 item.user = user
-                                item.save()
-    
+                                item.save()    
             except:
                 pass
 
@@ -117,10 +116,12 @@ def login(request):
             messages.success(request, 'You are now logged in.')
             url = request.META.get('HTTP_REFERER')
             try:
-                query = requests.utils.urlparse(url).query             
+                query = requests.utils.urlparse(url).query   
+                print("query",query)          
                 params = dict(x.split('=') for x in query.split('&'))
                 if 'next' in params:
                     nextPage = params['next']
+                    print("try : next")
                     return redirect(nextPage)
       
             except :
@@ -128,6 +129,7 @@ def login(request):
         else:
             messages.error(request, 'Invalid login creadentials')
             return redirect('login')
+        
     return render(request, 'accounts/login.html')
 
 @login_required(login_url = 'login')
